@@ -30,17 +30,22 @@ class Game {
       if (cube.y + cube.h >= gameBoxNode.offsetHeight) {
         cube.y = gameBoxNode.offsetHeight - cube.h;
         cube.node.style.top = `${cube.y}px`;
-        cube.node.style.background = "red";
+        this.node.style.backgroundImage = "linear-gradient(315deg, #6b0f1a 0%, #b91372 74%)";
+        this.node.style.boxShadow = "5px 10px 17px -3px"
         this.moveRight() = true
       }
-    }
+    //   else if(cube.x + cube.w >= gameBoxNode.offsetWidth){
+    //     this.gameOver()
+    //   }
+  }
 
     if (this.cubeArr.length > 0) {
         const currentCube = this.cubeArr[0];
         if (currentCube.y + currentCube.h >= gameBoxNode.offsetHeight && currentCube.isFalling) {
             currentCube.y = gameBoxNode.offsetHeight - currentCube.h;
             currentCube.node.style.top = `${currentCube.y}px`;
-            currentCube.node.style.background = "red";
+            this.node.style.backgroundImage = "linear-gradient(315deg, #6b0f1a 0%, #b91372 74%)";
+            this.node.style.boxShadow = "5px 10px 17px -3px"
             currentCube.isFalling = false;
             this.canSpawn = true;
         }

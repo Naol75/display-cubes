@@ -5,8 +5,8 @@ class Cube {
 
     this.x = 0;
     this.y = 0;
-    this.w = 200;
-    this.h = 100;
+    this.w = 170;
+    this.h = 120;
     this.gravitySpeed = 1;
 
     this.node.style.width = `${this.w}px`;
@@ -14,17 +14,29 @@ class Cube {
     this.node.style.position = "absolute";
     this.node.style.top = `${this.y}px`;
     this.node.style.left = `${this.x}px`;
-    this.node.style.background = "red";
+    this.direction = 1;
+    this.node.style.background = "#6b0f1a";
+    this.node.style.backgroundImage = "linear-gradient(315deg, #6b0f1a 0%, #b91372 74%)";
+    this.node.style.boxShadow = "5px 10px 17px -3px"
     this.isFalling = false;
+
+
+
   }
 
   moveRight = () => {
     if (!this.isFalling) {
-        this.x += 5;
+        this.x += 5 * this.direction;
         this.node.style.left = `${this.x}px`;
 
         if (this.x + this.w >= gameBoxNode.offsetWidth) {
-            this.x = gameBoxNode.offsetWidth - this.w;
+          this.x = gameBoxNode.offsetWidth - this.w;
+          this.direction = -1
+        }
+
+        if (this.x <= 0) {
+          this.x = 0
+          this.direction = 1
         }
     }
 };
@@ -41,7 +53,8 @@ class Cube {
         this.node.style.top = `${this.y}px`;
         this.isFalling = false;
         this.gravitySpeed = 1;
-        this.node.style.background = "red";
+        this.node.style.backgroundImage = "linear-gradient(315deg, #6b0f1a 0%, #b91372 74%)";
+        this.node.style.boxShadow = "5px 10px 17px -3px"
       }
     }
   };

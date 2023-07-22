@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    position: relative;
   }
 
   .container {
@@ -11,8 +12,19 @@ body {
   }
 
 
-  #game-box {
-    background-color: fuchsia;
+  #start-screen {
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+    }
+
+  #game-box, #wrapper{
     width:800px;
     height:800px;
   
@@ -21,7 +33,36 @@ body {
     position: relative; /* this will allow elements to be positioned relative to the game-box */
     user-select: none; /* this will prevent elements from being highlighted */
 
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+    
+    -webkit-animation: rainbow 18s ease infinite;
+    -z-animation: rainbow 18s ease infinite;
+    -o-animation: rainbow 18s ease infinite;
+      animation: rainbow 18s ease infinite;
+
   }
+
+  @-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
   
 
   #game-screen, #gameover-screen, #win-screen {
@@ -40,6 +81,7 @@ body {
   }
   
   .button {
+    top: 150px;
     min-width: 300px;
     min-height: 60px;
     font-family: 'Nunito', sans-serif;
@@ -114,3 +156,21 @@ body {
       opacity: 0;
     }
   }
+
+  mini-cube {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation-name: display-cube;
+    animation-duration: 4s;
+    animation-iteration-count: 3;
+}
+
+@keyframes display-cube {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:pink; left:200px; top:0px;}
+    50%  {background-color:white; left:200px; top:200px;}
+    75%  {background-color:red; left:0px; top:200px;}
+    100% {background-color:black; left:0px; top:0px;}
+}
