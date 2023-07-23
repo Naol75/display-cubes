@@ -23,12 +23,6 @@ const gradientRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(
 
 
 
-// Variable para alternar entre colores fríos y cálidos
-
-
-
-
-
 // * STATE MANAGEMENT FUNCTIONS
 
 
