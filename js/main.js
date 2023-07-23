@@ -12,25 +12,22 @@ const restartGameOverBtnNode = document.querySelector("#restart-btn");
 const winScreenRestartBtnNode = document.querySelector("#win-screen-restart-btn");
 
 
-const coolColorsArr = ["#00a8e8", "#007ea7", "#003459"];
-const warmColorsArr = ["#f94144", "#f3722c", "#f8961e"];
+const coolColorsArr = ["#00a8e8", "#ae79c9","#aeecef", "#00a8e8", "#007ea7", "#003459", "#64c2c2"];
+
+// Definir los colores cálidos
+const warmColorsArr = ["#6b0f1a", "#d4af37", "#f9c74f", "#f94144", "#f94144", "#f3722c", "#f8961e", "#90be6d"];
+
+
 const gradientRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-let colorIndex = 0;
 
 
-function randomCubeColor() {
 
-  const color = colorIndex % 2 === 0 ? coolColorsArr[colorIndex / 2] : warmColorsArr[Math.floor(colorIndex / 2)];
-  colorIndex++;
 
-  const randomGradient = {
-    background: color,
-    backgroundImage: "linear-gradient(315deg, ${color} 0%, ${gradientRandomColor} 74%)",
-    boxShadow: "5px 10px 17px -3px",
-  };
+// Variable para alternar entre colores fríos y cálidos
 
-  return randomGradient;
-}
+
+
+
 
 // * STATE MANAGEMENT FUNCTIONS
 
@@ -43,11 +40,6 @@ function startGame() {
 }
 
 
-function randomColor() {
-  // Generar colores aleatorios en formato hexadecimal (#RRGGBB)
-  const color1 = "#" + Math.floor(Math.random() * 16777215).toString(16);
-  const color2 = "#" + Math.floor(Math.random() * 16777215).toString(16);
-}
 
 
 function spaceBar(event) {

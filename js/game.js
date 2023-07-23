@@ -4,13 +4,44 @@ class Game {
     this.frames = 0;
     this.isGameOn = true;
     this.canSpawn = true;
+    this.colorIndex = 0
+  }
+
+
+  randomCubeColor() {
+    // Incrementar el índice de color para alternar entre colores fríos y cálidos
+    this.colorIndex++;
+
+    // Obtener el color actual alternando entre los arreglos coolColorsArr y warmColorsArr
+    const color =
+      this.colorIndex % 2 === 0
+        ? coolColorsArr[Math.floor(this.colorIndex / 2) - 1] // Restamos 1 al índice para ajustar el arreglo
+        : warmColorsArr[Math.floor(this.colorIndex / 2)];
+
+    // Generar otro color diferente para el gradiente
+    const gradientColor =
+      this.colorIndex % 2 === 0
+        ? coolColorsArr[Math.floor(this.colorIndex / 2)]
+        : warmColorsArr[Math.floor(this.colorIndex / 2) - 1]; // Restamos 1 al índice para ajustar el arreglo
+
+    // Crear el objeto de estilo con los colores generados
+    const style = {
+      background: color,
+      backgroundImage: `linear-gradient(315deg, ${color} 0%, ${gradientColor} 50%)`,
+      boxShadow: "5px 10px 17px -3px ",
+    };
+
+    return style;
   }
 
 
   spawnNewCube() {
     if (this.canSpawn) {
-      const style = randomCubeColor()
-      const newCube = new Cube(0, randomCubeColor);
+      const style = this.randomCubeColor();
+      const newCube = new Cube(0);
+      newCube.node.style.background = style.background;
+      newCube.node.style.backgroundImage = style.backgroundImage;
+      newCube.node.style.boxShadow = style.boxShadow;
       this.cubeArr.push(newCube);
       this.canSpawn = false;
     }

@@ -16,10 +16,6 @@ class Cube {
     this.node.style.top = `${this.y}px`;
     this.node.style.left = `${this.x}px`;
     this.direction = 1;
-    this.node.style.background = "#6b0f1a";
-    this.node.style.backgroundImage =
-      "linear-gradient(315deg, #6b0f1a 0%, #b91372 74%)";
-    this.node.style.boxShadow = "5px 10px 17px -3px";
   }
 
   moveRight = () => {
