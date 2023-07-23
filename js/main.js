@@ -12,10 +12,10 @@ const restartGameOverBtnNode = document.querySelector("#restart-btn");
 const winScreenRestartBtnNode = document.querySelector("#win-screen-restart-btn");
 
 
-const coolColorsArr = ["#00a8e8", "#ae79c9","#aeecef", "#00a8e8", "#007ea7", "#003459", "#64c2c2"];
+const coolColorsArr = ["#f94144", "#00a8e8", "#f8961e","#f9c74f", "#007ea7", "#003459", "#64c2c2"];
 
 // Definir los colores cálidos
-const warmColorsArr = ["#6b0f1a", "#d4af37", "#f9c74f", "#f94144", "#f94144", "#f3722c", "#f8961e", "#90be6d"];
+const warmColorsArr = ["#e6e6fa", "#0000ff", "#ffc0cb", "#f9c74f", "#f94144", "#f3722c", "#f8961e", "#90be6d"];
 
 
 const gradientRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -31,6 +31,11 @@ const gradientRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(
 
 // * STATE MANAGEMENT FUNCTIONS
 
+
+function getRandomColor(colorsArr) {
+  const randomIndex = Math.floor(Math.random() * colorsArr.length);
+  return colorsArr[randomIndex];
+}
 
 function startGame() {
   startScreenNode.style.display = "none";
