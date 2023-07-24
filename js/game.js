@@ -1,6 +1,7 @@
 class Game {
   constructor() {
     this.cubeArr = [];
+    this.fixedCubesArr = []
     this.frames = 0;
     this.isGameOn = true;
     this.canSpawn = true;
@@ -27,8 +28,8 @@ class Game {
     
     const style = {
       background: color,
-      backgroundImage: `linear-gradient(315deg, ${color} 0%, ${gradientColor} 60%)`,
-      boxShadow: "5px 10px 17px -3px ",
+      backgroundImage: `linear-gradient(150deg, ${color} 0%, white 95%)`,
+      boxShadow: "5px 10px 17px -3px",
     };
   
     return style;
@@ -62,30 +63,55 @@ class Game {
       const cube = this.cubeArr[i];
       if (cube.hasFallen()) {
         cube.fixPosition();
+        cube.isFixed = true
+
         this.cubeArr.splice(i, 1);
+        this.fixedCubesArr.push(cube)
         i--;
         this.canSpawn = true;
-      }
+        console.log(this.cubeArr)
+
 
     
-      for (let j = 0; j < this.cubeArr.length; j++) {
-        if (i !== j) {
-          const otherCube = this.cubeArr[j];
+    }
+  }
+}
+
+
+
+cubeToCubeCollision() {
+  if (this.fixedCubesArr.length > 0) {
+    for (let i = 0; i < this.cubeArr.length; i++) {
+      const currentCube = this.cubeArr[i];
+      if (!currentCube.isFixed) {
+        let nearestFixedCube = null;
+        for (const fixedCube of this.fixedCubesArr) {
           if (
-            cube.y + cube.h >= otherCube.y &&
-            cube.y <= otherCube.y + otherCube.h &&
-            cube.x + cube.w >= otherCube.x &&
-            cube.x <= otherCube.x + otherCube.w
+            currentCube.y + currentCube.h >= fixedCube.y &&
+            currentCube.y <= fixedCube.y + fixedCube.h &&
+            currentCube.x + currentCube.w >= fixedCube.x &&
+            currentCube.x <= fixedCube.x + fixedCube.w
           ) {
-            cube.fixPosition();
-            this.cubeArr.splice(i, 1);
-            i--;
-            break;
+            if (!nearestFixedCube || fixedCube.y + fixedCube.h > nearestFixedCube.y + nearestFixedCube.h) {
+              nearestFixedCube = fixedCube;
+            }
           }
+        }
+
+        if (nearestFixedCube) {
+          currentCube.isFixed = true;
+          currentCube.y = nearestFixedCube.y - currentCube.h;
+          this.fixedCubesArr.push(currentCube);
+          this.cubeArr.splice(i, 1);
+          this.canSpawn = true;
+          console.log(this.cubeArr);
+          break;
         }
       }
     }
   }
+}
+  
 
 
 
@@ -107,9 +133,11 @@ class Game {
     });
 
     this.cubeFloorCollision();
+    this.cubeToCubeCollision();
 
     if (this.isGameOn === true) {
       requestAnimationFrame(() => this.gameLoop());
     }
+    console.log(this.fixedCubesArr)
   }
 }

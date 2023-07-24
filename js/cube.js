@@ -16,6 +16,7 @@ class Cube {
     this.node.style.top = `${this.y}px`;
     this.node.style.left = `${this.x}px`;
     this.direction = 1;
+    this.isFixed = false
   }
 
   moveRight = () => {
