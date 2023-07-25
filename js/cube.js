@@ -6,13 +6,13 @@ class Cube {
     this.x = posX;
     this.y = 0;
 
-    this.w = 170; // Initial width of the cube
-    this.h = 120; // Initial height of the cube
+    this.w = 170;
+    this.h = 120; 
 
     this.gravitySpeed = 1;
     this.isFalling = false;
 
-    this.w = this.w * sizeMultiplier; // Apply the initial sizeMultiplier
+    this.w = this.w * sizeMultiplier;
     this.h = this.h * sizeMultiplier;
 
     this.speedMultiplier = speedMultiplier;
@@ -22,7 +22,7 @@ class Cube {
     this.direction = 1;
     this.isFixed = false;
 
-    this.w *= sizeMultiplier; // Apply the initial sizeMultiplier
+    this.w *= sizeMultiplier;
     this.h *= sizeMultiplier;
 
     this.node.style.width = `${this.w}px`;
@@ -33,7 +33,7 @@ class Cube {
 
   moveRight() {
     if (!this.isFalling) {
-      this.x += 5 * this.direction * this.speedMultiplier; // Apply speedMultiplier here
+      this.x += 5 * this.direction * this.speedMultiplier; 
       this.node.style.left = `${this.x}px`;
   
       if (this.x + this.w >= gameBoxNode.offsetWidth) {

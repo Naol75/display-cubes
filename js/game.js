@@ -38,10 +38,17 @@ class Game {
   }
 
 
+
   spawnNewCube() {
     if (this.canSpawn) {
       const style = this.randomCubeColor();
-      const newCube = new Cube(0, this.sizeMultiplier, this.speedMultiplier); // Pass the sizeMultiplier and speedMultiplier here
+      const cubeWidth = this.sizeMultiplier * 170;
+      const maxX = gameBoxNode.offsetWidth - cubeWidth;
+      const minX = 0;
+      const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+  
+      const newCube = new Cube(newX, this.sizeMultiplier, this.speedMultiplier);
+  
       newCube.node.style.background = style.background;
       newCube.node.style.backgroundImage = style.backgroundImage;
       newCube.node.style.boxShadow = style.boxShadow;
@@ -123,36 +130,39 @@ cubeToCubeCollision() {
 
 
 checkFixedCubeCount() {
-  if (this.fixedCubesArr.length >= 6) {
+  if (this.fixedCubesArr.length > 0) {
+    const lastFixedCube = this.fixedCubesArr[this.fixedCubesArr.length - 1];
+    const targetHeight = -50; 
 
-    const lastFixedCube = this.fixedCubesArr.pop();
+    if (lastFixedCube.y <= targetHeight) {
+
+      this.sizeMultiplier -= 0.1;
+      this.speedMultiplier += 0.1;
 
 
-    this.sizeMultiplier -= 0.1;
-    this.speedMultiplier += 0.1;
-
-    for (const fixedCube of this.fixedCubesArr) {
-      fixedCube.node.remove();
-    }
-    this.fixedCubesArr = [];
-    this.canSpawn = false;
-
-    lastFixedCube.isFalling = true;
-
-    let fallInterval = setInterval(() => {
-      lastFixedCube.y += lastFixedCube.gravitySpeed;
-      lastFixedCube.gravitySpeed += 0.1;
-      lastFixedCube.node.style.top = `${lastFixedCube.y}px`;
-
-      if (lastFixedCube.y + lastFixedCube.h >= gameBoxNode.offsetHeight) {
-       
-        clearInterval(fallInterval);
-        lastFixedCube.isFalling = false;
-        lastFixedCube.isFixed = false;
-        this.cubeArr.push(lastFixedCube);
-        this.canSpawn = true
+      for (const fixedCube of this.fixedCubesArr) {
+        fixedCube.node.remove();
       }
-    }, 5);
+
+      this.fixedCubesArr = [];
+      this.canSpawn = false;
+
+      lastFixedCube.isFalling = true;
+
+      let fallInterval = setInterval(() => {
+        lastFixedCube.y += lastFixedCube.gravitySpeed;
+        lastFixedCube.gravitySpeed += 0.1;
+        lastFixedCube.node.style.top = `${lastFixedCube.y}px`;
+
+        if (lastFixedCube.y + lastFixedCube.h >= gameBoxNode.offsetHeight) {
+          clearInterval(fallInterval);
+          lastFixedCube.isFalling = false;
+          lastFixedCube.isFixed = false;
+          this.cubeArr.push(lastFixedCube);
+          this.canSpawn = true;
+        }
+      }, 5);
+    }
   }
 }
 

@@ -60,5 +60,3 @@ restartGameOverBtnNode.addEventListener("click", startGame)
 winScreenRestartBtnNode.addEventListener("click", startGame)
 
 window.addEventListener("keydown", spaceBar);
-
-
