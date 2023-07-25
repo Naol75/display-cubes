@@ -1,5 +1,5 @@
 class Cube {
-  constructor(posX, randomCubeColor) {
+  constructor(posX, sizeMultiplier) {
     this.node = document.createElement("div");
     gameBoxNode.appendChild(this.node);
 
@@ -17,6 +17,12 @@ class Cube {
     this.node.style.left = `${this.x}px`;
     this.direction = 1;
     this.isFixed = false
+
+    this.w *= sizeMultiplier;
+    this.h *= sizeMultiplier;
+
+    this.node.style.width = `${this.w}px`;
+    this.node.style.height = `${this.h}px`;
   }
 
   moveRight = () => {

@@ -6,6 +6,8 @@ class Game {
     this.isGameOn = true;
     this.canSpawn = true;
     this.colorIndex = 0
+    this.sizeMultiplier = 1;
+    this.speedMultiplier = 1;
   }
 
 
@@ -39,7 +41,7 @@ class Game {
   spawnNewCube() {
     if (this.canSpawn) {
       const style = this.randomCubeColor();
-      const newCube = new Cube(0);
+      const newCube = new Cube(0, this.sizeMultiplier, this.speedMultiplier); // Pass the sizeMultiplier and speedMultiplier here
       newCube.node.style.background = style.background;
       newCube.node.style.backgroundImage = style.backgroundImage;
       newCube.node.style.boxShadow = style.boxShadow;
@@ -125,6 +127,9 @@ checkFixedCubeCount() {
 
     const lastFixedCube = this.fixedCubesArr.pop();
 
+
+    this.sizeMultiplier -= 0.1;
+    this.speedMultiplier += 0.1;
 
     for (const fixedCube of this.fixedCubesArr) {
       fixedCube.node.remove();
