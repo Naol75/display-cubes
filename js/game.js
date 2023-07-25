@@ -55,6 +55,9 @@ class Game {
       if (!currentCube.isFalling) {
         currentCube.isFalling = true;
       }
+      else {
+        this.canSpawn = false
+      }
     }
   }
 
@@ -73,6 +76,9 @@ class Game {
 
 
     
+    }
+    else {
+      this.canSpawn = false
     }
   }
 }
@@ -124,10 +130,9 @@ checkFixedCubeCount() {
       fixedCube.node.remove();
     }
     this.fixedCubesArr = [];
-
+    this.canSpawn = false;
 
     lastFixedCube.isFalling = true;
-
 
     let fallInterval = setInterval(() => {
       lastFixedCube.y += lastFixedCube.gravitySpeed;
@@ -139,8 +144,8 @@ checkFixedCubeCount() {
         clearInterval(fallInterval);
         lastFixedCube.isFalling = false;
         lastFixedCube.isFixed = false;
-        this.canSpawn = true;
         this.cubeArr.push(lastFixedCube);
+        this.canSpawn = true
       }
     }, 5);
   }
