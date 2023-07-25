@@ -114,6 +114,38 @@ cubeToCubeCollision() {
   
 
 
+checkFixedCubeCount() {
+  if (this.fixedCubesArr.length >= 6) {
+    // Obtenemos el último cubo fijado que caerá al suelo
+    const lastFixedCube = this.fixedCubesArr.pop();
+
+    // Removemos todos los otros cubos fijados del DOM y del arreglo
+    for (const fixedCube of this.fixedCubesArr) {
+      fixedCube.node.remove();
+    }
+    this.fixedCubesArr = [];
+
+    // Hacemos que el último cubo caiga al suelo
+    lastFixedCube.isFalling = true;
+
+    // Reiniciamos la posición en Y del último cubo para simular su caída
+    let fallInterval = setInterval(() => {
+      lastFixedCube.y += lastFixedCube.gravitySpeed;
+      lastFixedCube.gravitySpeed += 1;
+      lastFixedCube.node.style.top = `${lastFixedCube.y}px`;
+
+      if (lastFixedCube.y + lastFixedCube.h >= gameBoxNode.offsetHeight) {
+        // El cubo ha llegado al suelo
+        clearInterval(fallInterval);
+        lastFixedCube.isFalling = false;
+        lastFixedCube.isFixed = false;
+        this.canSpawn = true;
+        this.cubeArr.push(lastFixedCube);
+      }
+    }, 16); // Aproximadamente 60fps
+  }
+}
+
 
 
   gameOver() {
@@ -134,7 +166,7 @@ cubeToCubeCollision() {
 
     this.cubeFloorCollision();
     this.cubeToCubeCollision();
-
+    this.checkFixedCubeCount();
     if (this.isGameOn === true) {
       requestAnimationFrame(() => this.gameLoop());
     }
