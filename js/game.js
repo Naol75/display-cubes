@@ -172,8 +172,9 @@ checkFixedCubeCount() {
           clearInterval(fallInterval);
           lastFixedCube.isFalling = false;
           lastFixedCube.isFixed = false;
-          this.cubeArr.push(lastFixedCube);
+          this.cubeArr = []
           this.canSpawn = true;
+          this.fixedCubesArr = [];
         }
       }, 5);
     }
