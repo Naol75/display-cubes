@@ -71,6 +71,7 @@ class Cube {
     this.node.style.top = `${this.y}px`;
   };
 
+  
   hasFallen = () => {
     return this.y + this.h >= gameBoxNode.offsetHeight;
   };

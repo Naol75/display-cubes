@@ -139,11 +139,18 @@ checkFixedCubeCount() {
   if (this.fixedCubesArr.length > 0) {
     const lastFixedCube = this.fixedCubesArr[this.fixedCubesArr.length - 1];
     const targetHeight = -50; 
+    let penultimateFixedCube = null;
 
+    if (this.fixedCubesArr.length >= 2) {
+      penultimateFixedCube = this.fixedCubesArr[this.fixedCubesArr.length - 2];
+    }
+    
     if (lastFixedCube.y <= targetHeight) {
 
       this.sizeMultiplier -= 0.1;
       this.speedMultiplier += 0.1;
+      lastFixedCube.isFalling = true;
+      lastFixedCube.isFixed = false; 
 
 
       for (const fixedCube of this.fixedCubesArr) {
@@ -159,8 +166,9 @@ checkFixedCubeCount() {
         lastFixedCube.y += lastFixedCube.gravitySpeed;
         lastFixedCube.gravitySpeed += 0.1;
         lastFixedCube.node.style.top = `${lastFixedCube.y}px`;
-
-        if (lastFixedCube.y + lastFixedCube.h >= gameBoxNode.offsetHeight) {
+  
+        // Check if the lastFixedCube has properly aligned with the previous one
+        if (lastFixedCube.y + lastFixedCube.h >= penultimateFixedCube.y) {
           clearInterval(fallInterval);
           lastFixedCube.isFalling = false;
           lastFixedCube.isFixed = false;
