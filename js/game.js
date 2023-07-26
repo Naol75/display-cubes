@@ -75,22 +75,28 @@ class Game {
       const cube = this.cubeArr[i];
       if (cube.hasFallen()) {
         cube.fixPosition();
-        cube.isFixed = true
+        cube.isFixed = true;
 
         this.cubeArr.splice(i, 1);
-        this.fixedCubesArr.push(cube)
+        this.fixedCubesArr.push(cube);
         i--;
+
         this.canSpawn = true;
-        console.log(this.cubeArr)
+        console.log(this.cubeArr);
 
-
-    
-    }
-    else {
-      this.canSpawn = false
+        const penultimateFixedCubeIndex = this.fixedCubesArr.length - 2;
+        if (penultimateFixedCubeIndex >= 0) {
+          const penultimateFixedCube = this.fixedCubesArr[penultimateFixedCubeIndex];
+          if (cube.y + cube.h >= penultimateFixedCube.y) {
+            this.gameOver();
+            return;
+          }
+        }
+      } else {
+        this.canSpawn = false;
+      }
     }
   }
-}
 
 
 
