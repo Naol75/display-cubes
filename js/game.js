@@ -138,7 +138,7 @@ cubeToCubeCollision() {
 checkFixedCubeCount() {
   if (this.fixedCubesArr.length > 0) {
     const lastFixedCube = this.fixedCubesArr[this.fixedCubesArr.length - 1];
-    const targetHeight = -50; 
+    const targetHeight = 100; 
     let penultimateFixedCube = null;
 
     if (this.fixedCubesArr.length >= 2) {
@@ -168,7 +168,7 @@ checkFixedCubeCount() {
         lastFixedCube.node.style.top = `${lastFixedCube.y}px`;
   
         // Check if the lastFixedCube has properly aligned with the previous one
-        if (lastFixedCube.y + lastFixedCube.h >= penultimateFixedCube.y) {
+        if (lastFixedCube.y + lastFixedCube.h >= targetHeight) {
           clearInterval(fallInterval);
           lastFixedCube.isFalling = false;
           lastFixedCube.isFixed = false;
