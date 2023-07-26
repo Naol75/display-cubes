@@ -15,34 +15,6 @@
     margin: 50px;
     
   }
-
-
-  
-  #start-screen::before {
-    content: "";
-    width: 103.5%;
-    height: 102.5%;
-    background-image: linear-gradient(
-      var(--rotate)
-      , rgb(72, 233, 72), rgb(173, 115, 6) 43%, yellow, blue, rgb(212, 7, 212));
-      position: absolute;
-      z-index: -1;
-      top: -1.2%;
-      left: -1.8%;
-      animation: spin 4s linear infinite;
-  }
-
-  
-  
-  @keyframes spin {
-    0% {
-      --rotate: 0deg;
-    }
-    100% {
-      --rotate: 360deg;
-    }
-  }
-  
   
   #gameover-screen::before {
     content: "";
@@ -57,21 +29,7 @@
       left: -1.8%;
       animation: spin 4s linear infinite;
   }
-  
-  
-  #start-screen {
-      background: url("../images/startscreen.PNG");
-      background-size: cover;
-      position: absolute;
-      width: 800px;
-      height: 900px;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      margin: auto;
-      border-radius: 6px;
-    }
+
   #gameover-screen {
       background: url("../images/finalscreen2.PNG");
       background-size: cover;
@@ -86,6 +44,83 @@
       border-radius: 6px;
     }
 
+
+    #game-screen::before {
+      content: "";
+      width: 103.5%;
+      height: 102.5%;
+      background-image: linear-gradient(
+        var(--rotate)
+        , rgb(72, 233, 72), rgb(173, 115, 6) 43%, yellow, blue, rgb(212, 7, 212));
+        position: absolute;
+        z-index: -1;
+        top: -1.2%;
+        left: -1.8%;
+        animation: spin 4s linear infinite;
+    }
+
+
+  #game-screen {
+      background: url("../images/finalscreen2.PNG");
+      background-size: cover;
+      position: absolute;
+      width: 800px;
+      height: 900px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      border-radius: 6px;
+    }
+
+
+
+
+
+
+  #start-screen::before {
+    content: "";
+    width: 103.5%;
+    height: 102.5%;
+    background-image: linear-gradient(
+      var(--rotate)
+      , rgb(72, 233, 72), rgb(173, 115, 6) 43%, yellow, blue, rgb(212, 7, 212));
+      position: absolute;
+      z-index: -1;
+      top: -1.2%;
+      left: -1.8%;
+      animation: spin 4s linear infinite;
+  }
+
+  #start-screen {
+      background: url("../images/startscreen.PNG");
+      background-size: cover;
+      position: absolute;
+      width: 800px;
+      height: 900px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      border-radius: 6px;
+    }
+  
+  
+  @keyframes spin {
+    0% {
+      --rotate: 0deg;
+    }
+    100% {
+      --rotate: 360deg;
+    }
+  }
+  
+  
+  
+  
+
     
   #game-box, #wrapper{
     position: relative;
@@ -96,9 +131,9 @@
     right: 0;
     left: 0;
     margin: auto;
+    border-radius: 6px;
   
     /* default settings for game box */
-    overflow: hidden; /* this will prevent element from been visible outside the game box */
     position: absolute; /* this will allow elements to be positioned relative to the game-box */
     user-select: none; /* this will prevent elements from being highlighted */
 
