@@ -85,7 +85,7 @@ class Game {
         console.log(this.cubeArr);
 
         const penultimateFixedCubeIndex = this.fixedCubesArr.length - 2;
-        if (penultimateFixedCubeIndex >= 0) {
+        if (penultimateFixedCubeIndex >= 0 && this.fixedCubesArr.length >= 3) {
           const penultimateFixedCube = this.fixedCubesArr[penultimateFixedCubeIndex];
           if (cube.y + cube.h >= penultimateFixedCube.y) {
             this.gameOver();
