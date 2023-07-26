@@ -38,6 +38,13 @@ function startGame() {
 }
 
 
+function restartGame() {
+  gameOverScreenNode.style.display = "none";
+  gameScreenNode.style.display = "flex";
+  gameObj.resetGame();
+  gameObj.gameLoop();
+}
+
 
 
 function spaceBar(event) {
@@ -55,8 +62,6 @@ function spaceBar(event) {
 
 startBtnNode.addEventListener("click", startGame);
 
-restartGameOverBtnNode.addEventListener("click", startGame)
-
-winScreenRestartBtnNode.addEventListener("click", startGame)
+restartGameOverBtnNode.addEventListener("click", restartGame);
 
 window.addEventListener("keydown", spaceBar);

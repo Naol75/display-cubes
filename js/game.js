@@ -10,7 +10,17 @@ class Game {
     this.speedMultiplier = 1;
   }
 
-
+  resetGame() {
+    this.cubeArr = [];
+    this.fixedCubesArr = [];
+    this.frames = 0;
+    this.isGameOn = true;
+    this.canSpawn = true;
+    this.colorIndex = 0;
+    this.sizeMultiplier = 1;
+    this.speedMultiplier = 1;
+    gameBoxNode.innerHTML = ""
+  }
   
   randomCubeColor() {
     
@@ -183,11 +193,12 @@ checkFixedCubeCount() {
 
 
 
-  gameOver() {
-    this.isGameOn = false;
-    gameScreenNode.style.display = "none";
-    gameOverScreenNode.style.display = "flex";
-  }
+gameOver() {
+  this.isGameOn = false;
+  gameScreenNode.style.display = "none";
+  gameOverScreenNode.style.display = "flex";
+}
+
 
   gameLoop() {
     this.frames++;
