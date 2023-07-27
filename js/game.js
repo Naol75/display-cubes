@@ -15,10 +15,10 @@ class Game {
     gameScreenNode.addEventListener("click", (event) => this.dropCube(event));
     this.scoreDisplayNode = document.querySelector("#score-display");
     this.backgroundMusic = new Audio(
-      "../Music-sounds/2019-01-02_-_8_Bit_Menu_-_David_Renda_-_FesliyanStudios (mp3cut.net).mp3"
+      "./Music-sounds/2019-01-02_-_8_Bit_Menu_-_David_Renda_-_FesliyanStudios (mp3cut.net).mp3"
     );
-    this.scoreSound = new Audio("../Music-sounds/powerup.mp3");
-    this.gameOverSound = new Audio("../Music-sounds/game over.mp3");
+    this.scoreSound = new Audio("./Music-sounds/powerup.mp3");
+    this.gameOverSound = new Audio("./Music-sounds/game over.mp3");
   }
 
   resetGame() {
