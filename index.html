@@ -17,7 +17,13 @@
 
     <!-- GAME SCREEN -->
     <div id="game-screen" class="container">
-      <div id="game-box" class="wrapper" ></div>
+      <div id="game-box" class="wrapper"></div>
+      <div id="score-display">
+        <span id="blue-s">S</span>
+        <span id="red-c">c</span>
+        <span id="orange-o">o</span>
+        <span id="green-r">r</span>
+        <span id="purple-e">e</span>: 0</div>
     </div>
 
 
@@ -25,6 +31,15 @@
     <div id="gameover-screen" class="container">
       <div class="wrap">
         <button id="restart-btn" class="button">Play Again!</button>
+      </div>
+      <div id="gameover-score-display" class="score-display" class="gradient-border-score-game-over">
+        <span id="blue-s">S</span>
+        <span id="red-c">c</span>
+        <span id="orange-o">o</span>
+        <span id="green-r">r</span>
+        <span id="purple-e">e</span>
+        <span id="colon">:</span>
+        <span id="final-score">0</span>
       </div>
     </div>
     <script src="./js/main.js"></script>

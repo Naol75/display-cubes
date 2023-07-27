@@ -7,7 +7,7 @@ class Cube {
     this.y = 0;
 
     this.w = 170;
-    this.h = 120; 
+    this.h = 120;
 
     this.gravitySpeed = 1;
     this.isFalling = false;
@@ -29,18 +29,16 @@ class Cube {
     this.node.style.height = `${this.h}px`;
   }
 
-
-
   moveRight() {
     if (!this.isFalling) {
-      this.x += 5 * this.direction * this.speedMultiplier; 
+      this.x += 5 * this.direction * this.speedMultiplier;
       this.node.style.left = `${this.x}px`;
-  
+
       if (this.x + this.w >= gameBoxNode.offsetWidth) {
         this.x = gameBoxNode.offsetWidth - this.w;
         this.direction = -1;
       }
-  
+
       if (this.x <= 0) {
         this.x = 0;
         this.direction = 1;
@@ -64,14 +62,12 @@ class Cube {
     }
   };
 
-
   fixPosition = () => {
     this.isFalling = false;
     this.y = gameBoxNode.offsetHeight - this.h;
     this.node.style.top = `${this.y}px`;
   };
 
-  
   hasFallen = () => {
     return this.y + this.h >= gameBoxNode.offsetHeight;
   };
