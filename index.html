@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Display Cubes</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg" />
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
@@ -24,22 +24,32 @@
         <span id="red-c">c</span>
         <span id="orange-o">o</span>
         <span id="green-r">r</span>
-        <span id="purple-e">e</span>: 0</div>
+        <span id="purple-e">e</span>: 0
+      </div>
     </div>
-
 
     <!-- GAME OVER SCREEN -->
     <div id="gameover-screen" class="container">
       <div class="wrap">
         <button id="restart-btn" class="button">Play Again!</button>
       </div>
-      <div id="gameover-score-display" class="score-display" class="gradient-border-score-game-over">
-        <span id="blue-s">S</span>
-        <span id="red-c">c</span>
-        <span id="orange-o">o</span>
-        <span id="green-r">r</span>
-        <span id="purple-e">e</span>
-        <span id="colon">:</span>
+      <div
+        id="gameover-score-display"
+        class="score-display"
+        class="gradient-border-score-game-over"
+      >
+        <div id="gameover-highscore-display">
+          <span id="blue">H</span><span id="red">i</span
+          ><span id="orange">g</span><span id="green">h</span>
+          <span> </span>
+          <span id="blue">s</span><span id="red">c</span
+          ><span id="orange">o</span><span id="green">r</span
+          ><span id="purple">e</span><span id="colon">:</span>
+          <span id="high-score-value">0</span>
+        </div>
+        <span id="blue">S</span><span id="red">c</span><span id="orange">o</span
+        ><span id="green">r</span><span id="purple">e</span
+        ><span id="colon">:</span>
         <span id="final-score">0</span>
       </div>
     </div>

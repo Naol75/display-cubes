@@ -9,12 +9,15 @@ class Game {
     this.sizeMultiplier = 1;
     this.speedMultiplier = 1;
     this.score = 0;
+    this.highScore = 0;
+    this.loadHighScore();
     this.scoreDisplayNode = document.querySelector("#score-display");
-    this.backgroundMusic = new Audio("../Music-sounds/2019-01-02_-_8_Bit_Menu_-_David_Renda_-_FesliyanStudios (mp3cut.net).mp3");
+    this.backgroundMusic = new Audio(
+      "../Music-sounds/2019-01-02_-_8_Bit_Menu_-_David_Renda_-_FesliyanStudios (mp3cut.net).mp3"
+    );
     this.scoreSound = new Audio("../Music-sounds/powerup.mp3");
     this.gameOverSound = new Audio("../Music-sounds/game over.mp3");
   }
-
 
   resetGame() {
     this.cubeArr = [];
@@ -23,11 +26,22 @@ class Game {
     this.isGameOn = true;
     this.canSpawn = true;
     this.colorIndex = 0;
-    this.score = 0
+    this.score = 0;
     this.sizeMultiplier = 1;
     this.speedMultiplier = 1;
     gameBoxNode.innerHTML = "";
-    this.startBackgroundMusic()
+    this.startBackgroundMusic();
+  }
+
+  loadHighScore() {
+    const storedHighScore = localStorage.getItem("highScore");
+    if (storedHighScore) {
+      this.highScore = parseInt(storedHighScore, 10);
+    }
+  }
+
+  saveHighScore() {
+    localStorage.setItem("highScore", this.highScore.toString());
   }
 
   randomCubeColor() {
@@ -52,28 +66,27 @@ class Game {
     return style;
   }
 
-
   startBackgroundMusic() {
-    // Reproduce la música de fondo en bucle
     this.backgroundMusic.loop = true;
-    this.backgroundMusic.volume = 0.4; 
+    this.backgroundMusic.volume = 0.4;
     this.backgroundMusic.play();
   }
 
-
-
   playScoreSound() {
-    // Reproduce el sonido de obtención de puntuación
-    this.scoreSound.currentTime = 0; // Reinicia el sonido si ya está reproduciéndose
-    this.scoreSound.volume = 0.035; // Ajusta el volumen del sonido (de 0 a 1)
+    this.scoreSound.currentTime = 0;
+    this.scoreSound.volume = 0.033;
     this.scoreSound.play();
   }
 
   playGameOverSound() {
-    // Reproduce el sonido del Game Over
-    this.gameOverSound.currentTime = 0; // Reinicia el sonido si ya está reproduciéndose
-    this.gameOverSound.volume = 0.4; // Ajusta el volumen del sonido (de 0 a 1)
+    this.gameOverSound.currentTime = 0;
+    this.gameOverSound.volume = 0.4;
     this.gameOverSound.play();
+  }
+
+  stopGameOverMusic() {
+    this.gameOverSound.pause();
+    this.gameOverSound.currentTime = 0;
   }
 
   spawnNewCube() {
@@ -150,10 +163,28 @@ class Game {
     scoreLetters[2].style.color = "orange";
     scoreLetters[3].style.color = "green";
     scoreLetters[4].style.color = "purple";
-
     const scoreValueNode = document.querySelector("#score-value");
+    const highScoreValueNode = document.querySelector("#high-score-value");
+
+    if (highScoreValueNode) {
+      highScoreValueNode.textContent = this.highScore;
+      highScoreValueNode.style.color = "red";
+    }
+
     if (scoreValueNode) {
       scoreValueNode.textContent = this.score;
+
+      if (this.score > this.highScore) {
+        scoreValueNode.style.color = "green";
+      } else if (this.score < this.highScore) {
+        scoreValueNode.style.color = "red";
+      } else {
+        scoreValueNode.style.color = "white";
+      }
+    }
+
+    if (highScoreValueNode) {
+      highScoreValueNode.textContent = this.highScore;
     }
   }
 
@@ -252,6 +283,28 @@ class Game {
     const finalScoreNode = document.querySelector("#final-score");
     if (finalScoreNode) {
       finalScoreNode.textContent = this.score;
+
+      if (this.score > this.highScore) {
+        finalScoreNode.style.color = "green";
+      } else {
+        finalScoreNode.style.color = "red";
+      }
+    }
+
+    const highScoreValueNode = document.querySelector("#high-score-value");
+    if (highScoreValueNode) {
+      highScoreValueNode.textContent = this.highScore;
+
+      if (this.highScore > this.score) {
+        highScoreValueNode.style.color = "green";
+      } else {
+        highScoreValueNode.style.color = "red";
+      }
+    }
+
+    if (this.score > this.highScore) {
+      this.highScore = this.score;
+      this.saveHighScore();
     }
   }
 

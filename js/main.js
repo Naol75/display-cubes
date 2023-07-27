@@ -9,21 +9,35 @@ const restartWinScreenBtnNode = document.querySelector(
   "#win-screen-restart-btn"
 );
 const restartGameOverBtnNode = document.querySelector("#restart-btn");
-const winScreenRestartBtnNode = document.querySelector("#win-screen-restart-btn");
+const winScreenRestartBtnNode = document.querySelector(
+  "#win-screen-restart-btn"
+);
 
+const coolColorsArr = [
+  "#f94144",
+  "#00a8e8",
+  "#f8961e",
+  "#f9c74f",
+  "#007ea7",
+  "#003459",
+  "#64c2c2",
+];
 
-const coolColorsArr = ["#f94144", "#00a8e8", "#f8961e","#f9c74f", "#007ea7", "#003459", "#64c2c2"];
+const warmColorsArr = [
+  "#e6e6fa",
+  "#0000ff",
+  "#ffc0cb",
+  "#f9c74f",
+  "#f94144",
+  "#f3722c",
+  "#f8961e",
+  "#90be6d",
+];
 
-const warmColorsArr = ["#e6e6fa", "#0000ff", "#ffc0cb", "#f9c74f", "#f94144", "#f3722c", "#f8961e", "#90be6d"];
-
-
-const gradientRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-
-
+const gradientRandomColor =
+  "#" + Math.floor(Math.random() * 16777215).toString(16);
 
 // * STATE MANAGEMENT FUNCTIONS
-
 
 function getRandomColor(colorsArr) {
   const randomIndex = Math.floor(Math.random() * colorsArr.length);
@@ -38,15 +52,13 @@ function startGame() {
   gameObj.gameLoop();
 }
 
-
 function restartGame() {
   gameOverScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
   gameObj.resetGame();
+  gameObj.stopGameOverMusic();
   gameObj.gameLoop();
 }
-
-
 
 function spaceBar(event) {
   if (event.key === " ") {
@@ -54,12 +66,7 @@ function spaceBar(event) {
   }
 }
 
-
-
-
 // * ADD EVENT LISTENERS
-
-
 
 startBtnNode.addEventListener("click", startGame);
 

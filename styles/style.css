@@ -25,11 +25,19 @@
   position: absolute;
   padding: 10px;
   font-weight: 700;
-  top: 100px;
-  left: 170px;
-  font-size: 90px;
+  top: 170px;
+  left: 240px;
+  font-size: 70px;
   color: red;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#gameover-highscore-display {
+  width: 600px;
+  top: -80px;
+  left: -65px;
+  position: absolute;
+  font-size: 70px;
 }
 
 #gameover-score-display {
@@ -53,28 +61,28 @@
   }
 }
 
-#gameover-score-display #blue-s {
+#blue {
   color: greenyellow;
 }
 
-#gameover-score-display #red-c {
+#red {
   color: red;
 }
 
-#gameover-score-display #orange-o {
+#orange {
   color: yellow;
 }
 
-#gameover-score-display #green-r {
+#green {
   color: rgb(232, 3, 253);
 }
 
-#gameover-score-display #purple-e {
+#purple {
   color: rgb(255, 166, 0);
 }
 
 #colon {
-  font-size: 35px;
+  font-size: 70px;
   color: rgb(21, 255, 0);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
