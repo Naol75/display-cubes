@@ -34,6 +34,7 @@ function startGame() {
   startScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
   gameObj = new Game();
+  gameObj.startBackgroundMusic();
   gameObj.gameLoop();
 }
 
