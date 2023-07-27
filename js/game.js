@@ -1,5 +1,6 @@
 class Game {
   constructor() {
+    this.lastFrameTime = 0;
     this.cubeArr = [];
     this.fixedCubesArr = [];
     this.frames = 0;
@@ -309,7 +310,10 @@ class Game {
     }
   }
 
-  gameLoop() {
+  gameLoop(currentTime) {
+    const deltaTime = currentTime - this.lastFrameTime;
+    this.lastFrameTime = currentTime;
+
     this.frames++;
     this.spawnNewCube();
     this.cubeArr.forEach((eachCube) => {
@@ -325,7 +329,7 @@ class Game {
     this.createScoreLetters();
     this.updateScoreDisplay();
     if (this.isGameOn === true) {
-      requestAnimationFrame(() => this.gameLoop());
+      requestAnimationFrame((time) => this.gameLoop(time));
     }
   }
 }

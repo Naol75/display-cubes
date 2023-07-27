@@ -49,7 +49,8 @@ function startGame() {
   gameScreenNode.style.display = "flex";
   gameObj = new Game();
   gameObj.startBackgroundMusic();
-  gameObj.gameLoop();
+  gameObj.lastFrameTime = performance.now();
+  gameObj.gameLoop(gameObj.lastFrameTime);
 }
 
 function restartGame() {
@@ -57,6 +58,7 @@ function restartGame() {
   gameScreenNode.style.display = "flex";
   gameObj.resetGame();
   gameObj.stopGameOverMusic();
+  gameObj.lastFrameTime = performance.now();
   gameObj.gameLoop();
 }
 
