@@ -1,6 +1,5 @@
 class Game {
   constructor() {
-    this.lastFrameTime = 0;
     this.cubeArr = [];
     this.fixedCubesArr = [];
     this.frames = 0;
@@ -20,7 +19,6 @@ class Game {
     this.scoreSound = new Audio("./Music-sounds/powerup.mp3");
     this.gameOverSound = new Audio("./Music-sounds/game over.mp3");
   }
-
   resetGame() {
     this.cubeArr = [];
     this.fixedCubesArr = [];
@@ -34,63 +32,51 @@ class Game {
     gameBoxNode.innerHTML = "";
     this.startBackgroundMusic();
   }
-
   loadHighScore() {
     const storedHighScore = localStorage.getItem("highScore");
     if (storedHighScore) {
       this.highScore = parseInt(storedHighScore, 10);
     }
   }
-
   saveHighScore() {
     localStorage.setItem("highScore", this.highScore.toString());
   }
-
   randomCubeColor() {
     this.colorIndex++;
-
     const color =
       this.colorIndex % 2 === 0
         ? getRandomColor(coolColorsArr)
         : getRandomColor(warmColorsArr);
-
     const gradientColor =
       this.colorIndex % 2 === 1
         ? getRandomColor(coolColorsArr)
         : getRandomColor(warmColorsArr);
-
     const style = {
       background: color,
       backgroundImage: `linear-gradient(150deg, ${color} 0%, white 95%)`,
       boxShadow: "5px 10px 17px -3px",
     };
-
     return style;
   }
-
   startBackgroundMusic() {
     this.backgroundMusic.loop = true;
     this.backgroundMusic.volume = 0.4;
     this.backgroundMusic.play();
   }
-
   playScoreSound() {
     this.scoreSound.currentTime = 0;
     this.scoreSound.volume = 0.033;
     this.scoreSound.play();
   }
-
   playGameOverSound() {
     this.gameOverSound.currentTime = 0;
     this.gameOverSound.volume = 0.4;
     this.gameOverSound.play();
   }
-
   stopGameOverMusic() {
     this.gameOverSound.pause();
     this.gameOverSound.currentTime = 0;
   }
-
   spawnNewCube() {
     if (this.canSpawn) {
       const style = this.randomCubeColor();
@@ -98,9 +84,7 @@ class Game {
       const maxX = gameBoxNode.offsetWidth - cubeWidth;
       const minX = 0;
       const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
-
       const newCube = new Cube(newX, this.sizeMultiplier, this.speedMultiplier);
-
       newCube.node.style.background = style.background;
       newCube.node.style.backgroundImage = style.backgroundImage;
       newCube.node.style.boxShadow = style.boxShadow;
@@ -108,7 +92,6 @@ class Game {
       this.canSpawn = false;
     }
   }
-
   dropCube() {
     if (this.cubeArr.length > 0) {
       const currentCube = this.cubeArr[this.cubeArr.length - 1];
@@ -119,21 +102,17 @@ class Game {
       }
     }
   }
-
   cubeFloorCollision() {
     for (let i = 0; i < this.cubeArr.length; i++) {
       const cube = this.cubeArr[i];
       if (cube.hasFallen()) {
         cube.fixPosition();
         cube.isFixed = true;
-
         this.cubeArr.splice(i, 1);
         this.fixedCubesArr.push(cube);
         i--;
-
         this.canSpawn = true;
         console.log(this.cubeArr);
-
         const penultimateFixedCubeIndex = this.fixedCubesArr.length - 2;
         if (penultimateFixedCubeIndex >= 0 && this.fixedCubesArr.length >= 0) {
           const penultimateFixedCube =
@@ -148,16 +127,13 @@ class Game {
       }
     }
   }
-
   createScoreLetters() {
     const scoreDisplayNode = document.querySelector("#score-display");
     const scoreText = "";
     const score = this.score.toString();
-
     const scoreHTML = `${scoreText}<span id="blue-s">S</span><span id="red-c">c</span><span id="orange-o">o</span><span id="green-r">r</span><span id="purple-e">e</span>: <span id="score-value">${score}</span>`;
     scoreDisplayNode.innerHTML = scoreHTML;
   }
-
   updateScoreDisplay() {
     const scoreLetters = document.querySelectorAll("#score-display span");
     scoreLetters[0].style.color = "blue";
@@ -167,15 +143,12 @@ class Game {
     scoreLetters[4].style.color = "purple";
     const scoreValueNode = document.querySelector("#score-value");
     const highScoreValueNode = document.querySelector("#high-score-value");
-
     if (highScoreValueNode) {
       highScoreValueNode.textContent = this.highScore;
       highScoreValueNode.style.color = "red";
     }
-
     if (scoreValueNode) {
       scoreValueNode.textContent = this.score;
-
       if (this.score > this.highScore) {
         scoreValueNode.style.color = "green";
       } else if (this.score < this.highScore) {
@@ -184,12 +157,10 @@ class Game {
         scoreValueNode.style.color = "white";
       }
     }
-
     if (highScoreValueNode) {
       highScoreValueNode.textContent = this.highScore;
     }
   }
-
   cubeToCubeCollision() {
     if (this.fixedCubesArr.length > 0) {
       for (let i = 0; i < this.cubeArr.length; i++) {
@@ -212,7 +183,6 @@ class Game {
               }
             }
           }
-
           if (nearestFixedCube) {
             currentCube.isFixed = true;
             currentCube.y = nearestFixedCube.y - currentCube.h;
@@ -228,38 +198,30 @@ class Game {
       }
     }
   }
-
   checkFixedCubeCount() {
     if (this.fixedCubesArr.length > 0) {
       const lastFixedCube = this.fixedCubesArr[this.fixedCubesArr.length - 1];
       const targetHeight = 100;
       let penultimateFixedCube = null;
-
       if (this.fixedCubesArr.length >= 2) {
         penultimateFixedCube =
           this.fixedCubesArr[this.fixedCubesArr.length - 2];
       }
-
       if (lastFixedCube.y <= targetHeight) {
         this.sizeMultiplier -= 0.1;
         this.speedMultiplier += 0.1;
         lastFixedCube.isFalling = true;
         lastFixedCube.isFixed = false;
-
         for (const fixedCube of this.fixedCubesArr) {
           fixedCube.node.remove();
         }
-
         this.fixedCubesArr = [];
         this.canSpawn = false;
-
         lastFixedCube.isFalling = true;
-
         let fallInterval = setInterval(() => {
           lastFixedCube.y += lastFixedCube.gravitySpeed;
           lastFixedCube.gravitySpeed += 0.1;
           lastFixedCube.node.style.top = `${lastFixedCube.y}px`;
-
           if (lastFixedCube.y + lastFixedCube.h >= targetHeight) {
             clearInterval(fallInterval);
             lastFixedCube.isFalling = false;
@@ -272,48 +234,37 @@ class Game {
       }
     }
   }
-
   gameOver() {
     this.isGameOn = false;
     gameScreenNode.style.display = "none";
     gameOverScreenNode.style.display = "flex";
-
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
     this.playGameOverSound();
-
     const finalScoreNode = document.querySelector("#final-score");
     if (finalScoreNode) {
       finalScoreNode.textContent = this.score;
-
       if (this.score > this.highScore) {
         finalScoreNode.style.color = "green";
       } else {
         finalScoreNode.style.color = "red";
       }
     }
-
     const highScoreValueNode = document.querySelector("#high-score-value");
     if (highScoreValueNode) {
       highScoreValueNode.textContent = this.highScore;
-
       if (this.highScore > this.score) {
         highScoreValueNode.style.color = "green";
       } else {
         highScoreValueNode.style.color = "red";
       }
     }
-
     if (this.score > this.highScore) {
       this.highScore = this.score;
       this.saveHighScore();
     }
   }
-
-  gameLoop(currentTime) {
-    const deltaTime = currentTime - this.lastFrameTime;
-    this.lastFrameTime = currentTime;
-
+  gameLoop() {
     this.frames++;
     this.spawnNewCube();
     this.cubeArr.forEach((eachCube) => {
@@ -322,14 +273,13 @@ class Game {
         eachCube.moveDown();
       }
     });
-
     this.cubeFloorCollision();
     this.cubeToCubeCollision();
     this.checkFixedCubeCount();
     this.createScoreLetters();
     this.updateScoreDisplay();
     if (this.isGameOn === true) {
-      requestAnimationFrame((time) => this.gameLoop(time));
+      requestAnimationFrame(() => this.gameLoop());
     }
   }
 }
