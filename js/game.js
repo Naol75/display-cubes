@@ -151,6 +151,7 @@ class Game {
       scoreValueNode.textContent = this.score;
       if (this.score > this.highScore) {
         scoreValueNode.style.color = "green";
+        this.score.scoreValueNode.style.outline = "none";
       } else if (this.score < this.highScore) {
         scoreValueNode.style.color = "red";
       } else {
