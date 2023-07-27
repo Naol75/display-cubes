@@ -12,6 +12,7 @@ class Game {
     this.scoreDisplayNode = document.querySelector("#score-display");
     this.backgroundMusic = new Audio("../Music-sounds/2019-01-02_-_8_Bit_Menu_-_David_Renda_-_FesliyanStudios (mp3cut.net).mp3");
     this.scoreSound = new Audio("../Music-sounds/powerup.mp3");
+    this.gameOverSound = new Audio("../Music-sounds/game over.mp3");
   }
 
 
@@ -22,9 +23,11 @@ class Game {
     this.isGameOn = true;
     this.canSpawn = true;
     this.colorIndex = 0;
+    this.score = 0
     this.sizeMultiplier = 1;
     this.speedMultiplier = 1;
     gameBoxNode.innerHTML = "";
+    this.startBackgroundMusic()
   }
 
   randomCubeColor() {
@@ -64,6 +67,13 @@ class Game {
     this.scoreSound.currentTime = 0; // Reinicia el sonido si ya está reproduciéndose
     this.scoreSound.volume = 0.035; // Ajusta el volumen del sonido (de 0 a 1)
     this.scoreSound.play();
+  }
+
+  playGameOverSound() {
+    // Reproduce el sonido del Game Over
+    this.gameOverSound.currentTime = 0; // Reinicia el sonido si ya está reproduciéndose
+    this.gameOverSound.volume = 0.4; // Ajusta el volumen del sonido (de 0 a 1)
+    this.gameOverSound.play();
   }
 
   spawnNewCube() {
@@ -237,6 +247,7 @@ class Game {
 
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
+    this.playGameOverSound();
 
     const finalScoreNode = document.querySelector("#final-score");
     if (finalScoreNode) {
