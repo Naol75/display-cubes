@@ -11,6 +11,7 @@ class Game {
     this.score = 0;
     this.highScore = 0;
     this.loadHighScore();
+    gameScreenNode.addEventListener("click", (event) => this.dropCube(event));
     this.scoreDisplayNode = document.querySelector("#score-display");
     this.backgroundMusic = new Audio(
       "../Music-sounds/2019-01-02_-_8_Bit_Menu_-_David_Renda_-_FesliyanStudios (mp3cut.net).mp3"
