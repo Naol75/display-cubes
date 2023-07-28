@@ -30,6 +30,7 @@
   font-size: 70px;
   color: red;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-animation: grow 5s;
 }
 
 #gameover-highscore-display {
@@ -40,9 +41,6 @@
   font-size: 70px;
 }
 
-#gameover-score-display {
-  -webkit-animation: grow 5s;
-}
 
 @-webkit-keyframes grow {
   0% {
@@ -131,18 +129,29 @@
     yellow,
     blue,
     rgb(212, 7, 212)
-  );
-  position: absolute;
-  z-index: -1;
-  top: -1.2%;
-  left: -1.8%;
-  animation: spin 4s linear infinite;
-}
+    );
+    position: absolute;
+    z-index: -1;
+    top: -1.2%;
+    left: -1.8%;
+    animation: spin 4s linear infinite;
+  }
+
+
+
+  #winner-cup-container {
+    position: absolute;
+    background-image: url("../images/winner-cup.jpg");
+    background-size: contain;
+    width: 5em;
+  }
+
+
 
 #game-screen {
   background: url("../images/finalscreen2.PNG");
   background-size: cover;
-  position: absolute;
+  position: relative;
   width: 800px;
   height: 900px;
   top: 0;
@@ -152,6 +161,7 @@
   margin: auto;
   border-radius: 6px;
 }
+
 
 #start-screen::before {
   content: "";

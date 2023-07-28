@@ -1,4 +1,4 @@
-// * GLOBAL VARIABLES
+// Global Variables
 const startBtnNode = document.querySelector("#start-btn");
 const startScreenNode = document.querySelector("#start-screen");
 const gameScreenNode = document.querySelector("#game-screen");
@@ -37,41 +37,48 @@ const warmColorsArr = [
 const gradientRandomColor =
   "#" + Math.floor(Math.random() * 16777215).toString(16);
 
-// * STATE MANAGEMENT FUNCTIONS
+// State Management Functions
 
+// Function to get a random color from an array of colors
 function getRandomColor(colorsArr) {
   const randomIndex = Math.floor(Math.random() * colorsArr.length);
   return colorsArr[randomIndex];
 }
 
+// Function to start the game when the "Start" button is clicked
 function startGame() {
   startScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
   gameObj = new Game();
   gameObj.startBackgroundMusic();
-  gameObj.lastFrameTime = performance.now();
-  gameObj.gameLoop(gameObj.lastFrameTime);
+  gameObj.gameLoop();
 }
 
+// Function to restart the game when the "Restart" button is clicked
 function restartGame() {
   gameOverScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
   gameObj.resetGame();
   gameObj.stopGameOverMusic();
-  gameObj.lastFrameTime = performance.now();
   gameObj.gameLoop();
 }
 
+// Function to handle the "Space" key press
 function spaceBar(event) {
-  if (event.key === " ") {
+  if (event.key === " " && !gameObj.isGameOn) {
+    restartGame();
+  } else if (event.key === " ") {
     gameObj.dropCube();
   }
 }
 
-// * ADD EVENT LISTENERS
+// Add Event Listeners
 
+// Start the game when the "Start" button is clicked
 startBtnNode.addEventListener("click", startGame);
 
+// Restart the game when the "Restart" button is clicked on the game over screen
 restartGameOverBtnNode.addEventListener("click", restartGame);
 
+// Listen for the "Space" key press to drop a cube or restart the game
 window.addEventListener("keydown", spaceBar);
