@@ -12,9 +12,6 @@ class Game {
     this.score = 0;
     this.highScore = 0;
 
-    // Initialize properties for tracking time
-    this.lastTime = new Date(); // current date
-    this.realSecondsPassed = 0;
 
     // Load high score from local storage
     this.loadHighScore();
