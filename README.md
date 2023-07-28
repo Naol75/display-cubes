@@ -17,7 +17,7 @@ Display Cubes es un juego simple donde debes apilar cubos en una torre. El objet
 - Los cubos caen con gravedad hasta que colisionan con el suelo o con otro cubo fijo.
 - El juego lleva un registro de la puntuación y la puntuación más alta.
 - El juego se vuelve más desafiante con cubos más pequeños y rápidos en cada transición de nivel.
-- El juego termina cuando un nuevo cubo cae y se superpone al penúltimo cubo fijo.
+- El juego termina cuando un cubo toca el suelo
 
 # Backlog Functionalities
 
