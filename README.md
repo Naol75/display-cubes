@@ -108,7 +108,7 @@ hasFallen()
 [Link](https://trello.com/b/yTK93IU8/display-cubes)
 
 ### Slides
-[Link](www.your-slides-url-here.com)
+[Link](https://www.canva.com/design/DAFp6r-nVmI/fbMWwrpPJBxXprgAEK-5ug/edit?utm_content=DAFp6r-nVmI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Deploy
 [Link](https://github.com/Naol75/display-cubes)
